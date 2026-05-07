@@ -1,0 +1,25 @@
+GUIA RAPIDA DE AYUDA - WebAmpMod
+================================
+
+1. ¿COMO CAMBIO LA MUSICA?
+   - Ve a la carpeta: assets/music/
+   - Agrega tus archivos .mp3
+   - Registralos en index.html dentro de "const tracks"
+
+2. ¿COMO CAMBIO EL ASPECTO (SKINS)?
+   - Haz clic en el icono 🎨 en la barra inferior para rotar temas.
+   - Para agregar mas: pon archivos .wsz en assets/skins/ y agregalos a "const skins" en index.html
+
+3. ¿EL REPRODUCTOR SE VE MUY PEQUEÑO?
+   - En index.html, busca "#app" y cambia el valor de "scale(1.3)" por uno mayor (ej: 1.5)
+
+4. CONTROLES EN MOVIL:
+   - Si usas el navegador del movil, podras controlar la musica desde la pantalla de bloqueo.
+   - El icono ↻ sirve para reiniciar el reproductor si algo falla.
+
+CREDITOS:
+- Basado en Webamp (Winamp en JS)
+- Visualizaciones por Butterchurn
+- Estructura optimizada por Antigravity AI
+
+Para mas detalles lee README.md o DETALLES_PROYECTO.md

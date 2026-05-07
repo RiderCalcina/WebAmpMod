@@ -9,134 +9,130 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/images/winamp.ico" type="image/x-icon">
   <style>
-    /* Estilos para el fondo */
+    /**
+     * 1. ESTILOS DEL FONDO Y CUERPO (BODY)
+     * Aquí puedes cambiar la imagen de fondo (assets/images/bgrnd.jpg)
+     * o modificar el comportamiento de desplazamiento.
+     */
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-image: url('bgrnd.jpg');
-      /* Ruta de la imagen de fondo */
+      background-color: #000;
+      background-image: url('assets/images/bgrnd.jpg');
       background-size: cover;
-      /* Ajusta la imagen para cubrir toda la pantalla */
       background-position: center;
-      /* Centra la imagen */
       background-repeat: no-repeat;
-      /* Evita que la imagen se repita */
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-      /* Altura completa de la ventana */
-
-      /* Optimizaciones para móvil (App nativa) */
+      width: 100vw;
       overflow: hidden;
-      /* Evita que la pantalla se mueva */
       touch-action: none;
-      /* Previene el scrolling nativo o zoom con gestos */
       -webkit-user-select: none;
-      /* Previene selección de texto en iOS/Android */
       user-select: none;
       -webkit-tap-highlight-color: transparent;
-      /* Quita el cuadro azul al tocar */
     }
 
-    /* Contenedor principal */
+    /**
+     * 2. CONTENEDOR DEL REPRODUCTOR (#APP)
+     * 'transform: scale(1.3)' hace que el reproductor sea un 30% más grande.
+     * 'translateY(-12%)' lo sube un poco para dejar espacio a los botones de abajo.
+     */
     #app {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
-      background-color: transparent;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform: scale(1.3) translateY(-12%); /* Subir el reproductor para dar espacio abajo */
     }
 
     /* Estilo para el contenedor de links (Botones) */
     .bottom-links {
-        position: fixed;
-        bottom: 7%;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 9999;
-        display: flex;
-        flex-direction: row; /* Uno al lado del otro */
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        width: 100%;
-        max-width: 380px;
+      position: fixed;
+      bottom: 7%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: row;
+      /* Uno al lado del otro */
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      max-width: 380px;
     }
 
     .bottom-links a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        padding: 0;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(0, 229, 255, 0.4);
-        color: #00e5ff;
-        text-decoration: none;
-        border-radius: 50%;
-        font-family: Arial, sans-serif;
-        font-weight: bold;
-        font-size: 1.3rem;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
-        position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 45px;
+      height: 45px;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 229, 255, 0.4);
+      color: #00e5ff;
+      text-decoration: none;
+      border-radius: 50%;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.3rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      position: relative;
     }
 
     .bottom-links a:hover {
-        background: rgba(0, 229, 255, 0.15);
-        border-color: #00e5ff;
-        color: #fff;
-        transform: scale(1.1) rotate(360deg);
-        box-shadow: 0 10px 30px rgba(0, 229, 255, 0.4);
-        text-shadow: 0 0 15px #00e5ff;
+      background: rgba(0, 229, 255, 0.15);
+      border-color: #00e5ff;
+      color: #fff;
+      transform: scale(1.1) rotate(360deg);
+      box-shadow: 0 10px 30px rgba(0, 229, 255, 0.4);
+      text-shadow: 0 0 15px #00e5ff;
     }
 
     /* Tooltip estilizado */
     .bottom-links a::after {
-        content: attr(data-tooltip);
-        position: absolute;
-        bottom: 130%;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-        background: rgba(0, 0, 0, 0.9);
-        color: #00e5ff;
-        padding: 6px 12px;
-        border-radius: 8px;
-        font-size: 0.7rem;
-        font-family: 'Inter', sans-serif;
-        text-transform: none;
-        letter-spacing: 0.5px;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        pointer-events: none;
-        border: 1px solid rgba(0, 229, 255, 0.3);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 130%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(0, 0, 0, 0.9);
+      color: #00e5ff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-family: 'Inter', sans-serif;
+      text-transform: none;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      border: 1px solid rgba(0, 229, 255, 0.3);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .bottom-links a:hover::after {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
     }
 
     .bottom-links a:active {
-        transform: scale(0.95);
+      transform: scale(0.95);
     }
 
     /* Ocultar el separador si existe */
     .bottom-links span {
-        display: none;
+      display: none;
     }
   </style>
 </head>
@@ -145,16 +141,26 @@
   <!-- Botón de actualización único con símbolo y tooltip -->
   <div class="bottom-links">
     <a href="#" onclick="window.location.reload(); return false;" data-tooltip="Actualizar Reproductor">↻</a>
+    <a href="#" id="skin-button" data-tooltip="Siguiente Skin">🎨</a>
   </div>
 
   <!-- Contenedor para Webamp -->
   <div id="app"></div>
 
-  <!-- Script para inicializar Webamp con soporte visual Butterchurn (Milkdrop) -->
+  <!-- 
+    4. SCRIPT PRINCIPAL (LÓGICA DEL REPRODUCTOR) 
+    Utiliza Webamp, una recreación de Winamp 2.9 en JavaScript.
+    -->
   <script type="module">
     import Webamp from "https://unpkg.com/webamp@^2/butterchurn";
 
     document.addEventListener("DOMContentLoaded", () => {
+      /**
+       * LISTA DE CANCIONES (TRACKS)
+       * Para añadir una nueva canción:
+       * 1. Copia el archivo .mp3 a 'assets/music/'
+       * 2. Añade un objeto como este: { metaData: { artist: "...", title: "..." }, url: "assets/music/archivo.mp3", duration: segundos }
+       */
       const tracks = [
         {
           metaData: {
@@ -165,16 +171,73 @@
           duration: 5.322286,
         },
         {
-          metaData: {
-            title: "I Wanna be Somebody - Luisiño",
-            artist: "W.A.S.P.",
-          },
-          url: "WASPIwannabesomebody.mp3", // Asegúrate de que la ruta sea correcta
-          duration: 214.750, // Duración en segundos
+          metaData: { artist: "A-ha", title: "Take On Me" },
+          url: "assets/music/01 - A-ha - Take On Me.mp3",
+          duration: 227
+        },
+        {
+          metaData: { artist: "Eagles", title: "Hotel California" },
+          url: "assets/music/02 - Eagles - Hotel California.mp3",
+          duration: 391
+        },
+        {
+          metaData: { artist: "Queen", title: "Bohemian Rhapsody" },
+          url: "assets/music/03 - Queen - Bohemian Rhapsody.mp3",
+          duration: 355
+        },
+        {
+          metaData: { artist: "Guns N' Roses", title: "Sweet Child o' Mine" },
+          url: "assets/music/04 - Guns N' Roses - Sweet Child o' Mine.mp3",
+          duration: 356
+        },
+        {
+          metaData: { artist: "Michael Jackson", title: "Billie Jean" },
+          url: "assets/music/05 - Michael Jackson - Billie Jean.mp3",
+          duration: 294
+        },
+        {
+          metaData: { artist: "Linkin Park", title: "In the End" },
+          url: "assets/music/06 - Linkin Park - In the End.mp3",
+          duration: 216
+        },
+        {
+          metaData: { artist: "System of a Down", title: "Toxicity" },
+          url: "assets/music/07 - System of a Down - Toxicity.mp3",
+          duration: 219
+        },
+        {
+          metaData: { artist: "Van Halen", title: "Jump" },
+          url: "assets/music/08 - Van Halen - Jump.mp3",
+          duration: 241
+        },
+        {
+          metaData: { artist: "Bon Jovi", title: "Livin' on a Prayer" },
+          url: "assets/music/09 - Bon Jovi - Livin' on a Prayer.mp3",
+          duration: 249
+        },
+        {
+          metaData: { artist: "Ace of Base", title: "The Sign" },
+          url: "assets/music/10 - Ace of Base - The Sign.mp3",
+          duration: 191
+        },
+        {
+          metaData: { artist: "Soda Stereo", title: "Persiana Americana" },
+          url: "assets/music/11 - Soda Stereo - Persiana Americana.mp3",
+          duration: 292
+        },
+        {
+          metaData: { artist: "Joe Satriani", title: "Summer Song" },
+          url: "assets/music/12 - Joe Satriani - Summer Song.mp3",
+          duration: 360
+        },
+        {
+          metaData: { artist: "Manowar", title: "Die for Metal" },
+          url: "assets/music/13 - Manowar - Die for Metal.mp3",
+          duration: 316
         },
         {
           metaData: {
-            title: "Rock Antenne - the best music in the world",
+            title: "Rock Antenne",
             artist: "Radio",
           },
           url: "https://stream.rockantenne.de/rockantenne/stream/mp3",
@@ -182,7 +245,7 @@
         },
         {
           metaData: {
-            title: "Heavy Metal - the best music in the world",
+            title: "Heavy Metal",
             artist: "Radio",
           },
           url: "https://s1-webradio.rockantenne.de/heavy-metal/stream/mp3",
@@ -190,14 +253,63 @@
         }
       ];
 
+      /**
+       * CONFIGURACIÓN INICIAL DE WEBAMP
+       * Aquí se cargan las canciones y se define la piel (skin) por defecto.
+       */
       const webamp = new Webamp({
         initialTracks: tracks,
         initialSkin: {
-          url: "Luis.wsz", // Asegúrate de que la ruta sea correcta
+          url: "assets/skins/base-2.91.wsz", // Cambia esto para iniciar con otra skin
         },
       });
 
-      // --- Media Session API Implementation ---
+      /**
+       * SELECTOR DE TEMAS (SKINS)
+       * Lista de rutas a los archivos .wsz. 
+       * Si añades una skin nueva a 'assets/skins/', agrégala también aquí abajo.
+       * Puedes descargar más skins en: https://skins.webamp.org/
+       */
+      const skins = [
+        "assets/skins/base-2.91.wsz",
+        "assets/skins/Luis.wsz",
+        "assets/skins/alpine.wsz",
+        "assets/skins/Aerosmith_Amp.wsz",
+        "assets/skins/Bento_Classified.wsz",
+        "assets/skins/Bob_And_George.wsz",
+        "assets/skins/Ice.wsz",
+        "assets/skins/Integra_Hellsing.wsz",
+        "assets/skins/K-CC.wsz",
+        "assets/skins/Maths.wsz",
+        "assets/skins/Rust_In_Peace.wsz",
+        "assets/skins/San_Andreas.wsz",
+        "assets/skins/Scrap.wsz",
+        "assets/skins/Sequence_DS.wsz",
+        "assets/skins/SpyAMP_Professional_Edition_v5.wsz",
+        "assets/skins/Winamp3_Classified_v5.5.wsz",
+        "assets/skins/Winamp5_Classified_v5.5.wsz",
+        "assets/skins/WindowsXp_Blue.wsz",
+        "assets/skins/Zaxon_v5.wsz",
+        "assets/skins/l_winamp_skin_by_sweetlittlelie87.wsz"
+      ];
+
+      let currentSkinIndex = 0;
+      const skinButton = document.getElementById('skin-button');
+
+      if (skinButton) {
+        skinButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Rota al siguiente índice y aplica la skin
+          currentSkinIndex = (currentSkinIndex + 1) % skins.length;
+          webamp.setSkinFromUrl(skins[currentSkinIndex]);
+        });
+      }
+
+      /**
+       * MEDIA SESSION API
+       * Permite que aparezca el nombre de la canción y los controles
+       * en la pantalla de bloqueo y la barra de notificaciones del móvil.
+       */
       const updateMediaSession = (track) => {
         if ('mediaSession' in navigator && track) {
           navigator.mediaSession.metadata = new MediaMetadata({
@@ -205,18 +317,23 @@
             artist: track.artist || "Artista",
             album: "Webamp Retro",
             artwork: [
-              { src: 'bgluis.jpg', sizes: '96x96', type: 'image/jpeg' },
-              { src: 'bgluis.jpg', sizes: '128x128', type: 'image/jpeg' },
-              { src: 'bgluis.jpg', sizes: '192x192', type: 'image/jpeg' },
-              { src: 'bgluis.jpg', sizes: '256x256', type: 'image/jpeg' },
-              { src: 'bgluis.jpg', sizes: '384x384', type: 'image/jpeg' },
-              { src: 'bgluis.jpg', sizes: '512x512', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '96x96', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '128x128', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '192x192', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '256x256', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '384x384', type: 'image/jpeg' },
+              { src: 'assets/images/bgluis.jpg', sizes: '512x512', type: 'image/jpeg' },
             ]
           });
         }
       };
 
-      // --- Prevenir suspensión de AudioContext ---
+      /**
+       * PREVENIR SUSPENSIÓN (AUDIO CONTEXT & WAKE LOCK)
+       * Truco para que el móvil no detenga la música al apagar la pantalla.
+       * 1. 'silencer' reproduce un silencio constante para mantener vivo el proceso de audio.
+       * 2. 'WakeLock' intenta mantener la pantalla encendida si el navegador lo permite.
+       */
       const silencer = document.createElement('audio');
       silencer.loop = true;
       silencer.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA="; // Silencio corto
@@ -224,12 +341,17 @@
       // Truco del "Wake Lock" y "Silent Audio" para evitar que el sistema mate el proceso
       let wakeLock = null;
       async function requestWakeLock() {
+        if (wakeLock !== null) return; // Ya está activo, no hacer nada
+        
         try {
           if ('wakeLock' in navigator) {
             wakeLock = await navigator.wakeLock.request('screen');
+            wakeLock.addEventListener('release', () => { wakeLock = null; });
           }
-          // Reproducir silencio para mantener el thread de audio vivo en móviles
-          silencer.play().catch(e => console.log("Silent audio blocked"));
+          // Reproducir silencio solo si está pausado
+          if (silencer.paused) {
+            silencer.play().catch(e => console.log("Silent audio blocked"));
+          }
         } catch (err) {
           console.error(`${err.name}, ${err.message}`);
         }
