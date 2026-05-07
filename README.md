@@ -1,4 +1,4 @@
-# WebAmpMod - Reproductor Retro Personalizable
+# WebAmpMod - Reproductor Winamp Web
 
 ![Vista Previa del Reproductor](assets/images/interfaz.jpg)
 
