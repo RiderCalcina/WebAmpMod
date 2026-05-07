@@ -6,7 +6,7 @@ Este documento está diseñado para ayudarte a modificar el reproductor a tu gus
 El proyecto está estructurado para que los recursos sean fáciles de encontrar:
 - `assets/music/`: Coloca aquí tus archivos `.mp3`.
 - `assets/skins/`: Coloca aquí tus archivos de skin `.wsz`.
-- `assets/images/`: Contiene el fondo (`bgrnd.jpg`), la carátula móvil (`bgluis.jpg`) y el icono del sitio (`winamp.ico`).
+- `assets/images/`: Contiene el fondo (`bgrnd.jpg`), y el icono del sitio (`winamp.ico`).
 
 ## 🎵 Cómo añadir nueva música
 1. Sube tu archivo a la carpeta `assets/music/`.
