@@ -1,4 +1,4 @@
-# WebAmpMod - Reproductor Winamp Web
+# WebAmpMod - Reproductor WinAmp Web
 
 ![Vista Previa del Reproductor](assets/images/interfaz.jpg)
 
